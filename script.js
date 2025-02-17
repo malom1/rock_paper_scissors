@@ -21,6 +21,7 @@ function getComputerChoice(){
     return computerChoice.toLowerCase();
 }
 
+//Takes in user input and checks to see if the input is valid.
 function getHumanChoice(){
 
     let humanChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
@@ -31,8 +32,10 @@ function getHumanChoice(){
     return humanChoice;
 }
 
+//This function represents one round and increments scores accordingly.
 function playRound(humanChoice, computerChoice){
 
+    //Base case to see if it is a tie. No points incremented for either player.
     if (humanChoice===computerChoice){
         console.log("Tie! You and the computer both chose "+`${humanChoice}`);
     } else if (humanChoice==='rock' && computerChoice ==='paper') {
@@ -50,6 +53,7 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
+//This function plays the game for 5 rounds and determines the overall winner.
 function playGame() {
 
     for (let i=0; i<5; i++){
@@ -65,4 +69,5 @@ function playGame() {
     } 
 }
 
+//Function call to play the game.
 playGame();
