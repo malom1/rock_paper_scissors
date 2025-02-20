@@ -6,31 +6,20 @@ let computerScore = 0;
 //Generates a random number between 1-10 and chooses an option of rock, paper, or scissor
 //based on the number range.
 function getComputerChoice(){
-
-    let computerChoice = "";
-    let num = Math.floor(Math.random() * 10);
-    
-    if (num >= 0 && num <=3){
-        computerChoice = "Rock";
-    } else if (num >= 4 && num <=6){
-        computerChoice = "Paper";
-    } else {
-        computerChoice = "Scissors"
-    }
-    //return the choice in lowercase for case sensitive measures
-    return computerChoice.toLowerCase();
+    const choices = ["rock", "paper", "scissors"]
+    return choices[Math.floor(Math.random() *choices.length)];
 }
 
-//Takes in user input and checks to see if the input is valid.
-function getHumanChoice(){
+// Takes in user input and checks to see if the input is valid.
+// function getHumanChoice(){
 
-    let humanChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
+//     let humanChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
 
-    while (humanChoice !== 'rock' && humanChoice !== 'paper' && humanChoice !== 'scissors') {
-        humanChoice = prompt("Wrong input, try again! Rock, Paper, or Scissors?").toLowerCase();
-    }
-    return humanChoice;
-}
+//     while (humanChoice !== 'rock' && humanChoice !== 'paper' && humanChoice !== 'scissors') {
+//         humanChoice = prompt("Wrong input, try again! Rock, Paper, or Scissors?").toLowerCase();
+//     }
+//     return humanChoice;
+// }
 
 //This function represents one round and increments scores accordingly.
 function playRound(humanChoice, computerChoice){
@@ -53,21 +42,32 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
-//This function plays the game for 5 rounds and determines the overall winner.
-function playGame() {
-
-    for (let i=0; i<5; i++){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
+function handleRound(humanSelection){
+    if (humanScore >= 5 || computerScore >= 5){
+        return;
     }
 
-    if (humanScore > computerScore){
-        return console.log("You won the game. You scored " + `${humanScore}` + " and the computer scored " + `${computerScore}`);
-    } else {
-        return console.log("You lost the game. You scored " + `${humanScore}` + " and the computer scored " + `${computerScore}`);
-    } 
+    const computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
 }
+
+function playGame() {
+    const btnRock = document.querySelector("#rock");
+    btnRock.addEventListener("click", () => {
+        handleRound("rock");
+    });
+        
+    const btnPaper = document.querySelector("#paper");
+    btnPaper.addEventListener("click", () => {
+        handleRound("paper");
+    });
+        
+    const btnScissors = document.querySelector("#scissors");
+    btnScissors.addEventListener("click", () => {
+        handleRound("scissor");
+    });
+}
+
 
 //Function call to play the game.
 playGame();
